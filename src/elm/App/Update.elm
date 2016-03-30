@@ -4,6 +4,7 @@ import App.Model as App exposing (initialModel, Model)
 
 import Config.Update exposing (init, Action)
 import Company.Model as Company exposing (Model)
+import Counter.Model as Counter exposing (Model)
 import Effects exposing (Effects)
 import Json.Encode as JE exposing (string, Value)
 import String exposing (isEmpty)
@@ -100,6 +101,7 @@ update action model =
         context =
           { accessToken = model.accessToken
           , backendConfig = (.config >> .backendConfig) model
+          , counter = model.counter
           , companies = model.companies
           }
 

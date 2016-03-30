@@ -2,6 +2,7 @@ module App.Model where
 
 import Config.Model as Config exposing (initialModel, Model)
 import Company.Model as Company exposing (Model)
+import Counter.Model as Counter exposing (Model)
 
 -- Pages import
 
@@ -29,6 +30,7 @@ type alias Model =
   , config : Config.Model
   , configError : Bool
   , companies : List Company.Model
+  , counter : Counter.Model
   , events : Event.Model
   , githubAuth: GithubAuth.Model
   , login: Login.Model
@@ -45,6 +47,7 @@ initialModel =
   , config = Config.initialModel
   , configError = False
   , companies = []
+  , counter = Counter.initialModel
   , events = Event.initialModel
   , githubAuth = GithubAuth.initialModel
   , login = Login.initialModel

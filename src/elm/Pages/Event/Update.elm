@@ -3,6 +3,7 @@ module Pages.Event.Update where
 import Config exposing (cacheTtl)
 import Config.Model exposing (BackendConfig)
 import Company.Model as Company exposing (Model)
+import Counter.Model as Counter exposing (Model)
 import Effects exposing (Effects)
 import Event.Decoder exposing (decode)
 import Event.Model exposing (Event)
@@ -48,6 +49,7 @@ type Action
 type alias Context =
   { accessToken : String
   , backendConfig : BackendConfig
+  , counter : Counter.Model
   , companies : List Company.Model
   }
 
@@ -68,7 +70,7 @@ update context action model =
     ChildEventCompanyFilterAction act ->
       let
         childModel =
-          EventCompanyFilter.Update.update context.companies act model.eventCompanyFilter
+          EventCompanyFilter.Update.update context.counter context.companies act model.eventCompanyFilter
 
         maybeCompanyId =
           -- Reach into the selected company, in order to invoke getting the

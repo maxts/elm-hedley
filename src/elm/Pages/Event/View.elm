@@ -1,6 +1,7 @@
 module Pages.Event.View where
 
 import Company.Model as Company exposing (Model)
+import Counter.Model as Counter exposing (Model)
 import EventAuthorFilter.View exposing (view)
 import EventCompanyFilter.View exposing (view)
 import EventList.View exposing (view)
@@ -15,7 +16,7 @@ type alias CompanyId = Int
 type alias Model = Pages.Event.Model.Model
 
 type alias Context =
-  { companies : List Company.Model }
+  { companies : List Company.Model, counter: Counter.Model }
 
 view : Context -> Signal.Address Action -> Model -> Html
 view context address model =
@@ -40,7 +41,7 @@ view context address model =
       ]
       [ div [class "row"]
         [ div [class "col-md-3 first"]
-            [ (EventCompanyFilter.View.view context.companies childEventCompanyFilterAddress model.eventCompanyFilter)
+            [ (EventCompanyFilter.View.view context.counter context.companies childEventCompanyFilterAddress model.eventCompanyFilter)
             , (EventAuthorFilter.View.view model.events childEventAuthorFilterAddress model.eventAuthorFilter)
             , (EventList.View.view filteredEvents childEventListAddress model.eventList)
             ]
